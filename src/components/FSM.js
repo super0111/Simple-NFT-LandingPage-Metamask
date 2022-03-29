@@ -2,23 +2,37 @@ import * as React from 'react';
 import classes from './FSM.module.css'
 import { FcCurrencyExchange } from "react-icons/fc";
 
-const FSM = () => {
+const FSM = (props) => {
+    const { balance, stake, plan, plan_id } = props;
+    const [value, setValue] = React.useState(0);
+    const percent = plan[1];
+    const duration = plan[0];
+    const daily_earning = parseInt(percent/duration);
+    
+    React.useEffect(() => {
+        // console.log(stake);
+        
+    }, []);
+
+    const handleChange = (event) => {
+        setValue(event.target.value);
+    }
   return (
     <div className={classes.ftm}>
         <div className={classes.header}>
-            <img className={classes.header_img} src='/img/FSM.26a08c9ac39524cc989b.png' />
+            <img className={classes.header_img} src='/img/FSM.26a08c9ac39524cc989b.png' alt=''/>
             <div className={classes.title_field}>
                 <div className={classes.title}>FSM</div>
-                <div className={classes.title_comment}>Duration: 3 days</div>
+                <div className={classes.title_comment}>Duration: {duration} days</div>
             </div>
             <div className={classes.price_field}>
                 <div className={classes.price_name}>
                     Daily Earnings : 
-                    <span className={classes.ftm_value}> 4%</span>
+                    <span className={classes.ftm_value}> {daily_earning}%</span>
                 </div>
                 <div className={classes.usd_price}>
                     Total Return :
-                    <span className={classes.usd_price}> 10%</span>
+                    <span className={classes.usd_price}> {percent}%</span>
                 </div>
             </div>
         </div>
@@ -35,13 +49,16 @@ const FSM = () => {
             </div>
             <div className={classes.amount}>
                 <div className={classes.flexRow}>
-                    <div className={classes.amount_name}>Amount</div>    
-                    <div className={classes.balance}>Walet Balance: 0 AVAX</div>
+                    <div className={classes.amount_name}>Amount: </div>    
+                    <div className={classes.balance}>Wallet Balance: {balance} AVAX</div>
                 </div>
-                <div className={classes.amount_value}><FcCurrencyExchange /> 0.0</div>
+                <div className={classes.amount_value}>
+                    <FcCurrencyExchange />
+                    <input className={classes.deposit_input} type='number' step={1} value={value} onChange={handleChange} />
+                </div>
             </div>
             <div className={classes.deposit_field}>
-                <button className={classes.deposit_btn}>STAKE</button>
+                <button className={classes.deposit_btn} onClick={() => stake(plan_id, value)}>STAKE</button>
             </div>
         </div>
     </div>

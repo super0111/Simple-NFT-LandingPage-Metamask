@@ -4,7 +4,7 @@ import classes from './Total.module.css'
 const Total = () => {
     return (
         <div className={classes.total}>
-            <img className={classes.total_img} src="/img/download (6).png" />
+            <img className={classes.total_img} src="/img/download (6).png" alt='img' />
             <div>
                 <div className={classes.title}>
                     Total Referrals Rewards

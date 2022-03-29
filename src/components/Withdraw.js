@@ -1,7 +1,8 @@
 
 import classes from './Withdraw.module.css'
 import { BiCopy } from "react-icons/bi";
-const Withdraw = () => {
+const Withdraw = (props) => {
+    // const { withdrawFunc } = props;
     return (
         <div className={classes.flexCol}>
             <div className={classes.header_title}>REFERRAL</div>

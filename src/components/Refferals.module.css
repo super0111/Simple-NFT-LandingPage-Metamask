@@ -28,6 +28,15 @@
     color: rgb(255, 255, 255);
     text-transform: uppercase;
 }
+.deposit_input {
+    border: none;
+    outline: none;
+    margin-left: 5px;
+    padding: 3px 5px;
+    border-radius: 5px;
+    opacity: 0.8;
+    background:rgb(92, 159, 226)
+}
 .bonus {
     font-size: 17px;
     font-weight: 600;
@@ -63,6 +72,7 @@
     font-weight: 600;
     color: rgb(255, 255, 255);
     margin-left: 5px;
+    margin-top: 5px;
 }
 .btn {
     width: 70%;

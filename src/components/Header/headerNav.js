@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState }  from 'react';
 import Link from '@material-ui/core/Link';
 import Toolbar from '@material-ui/core/Toolbar';
 import classes from './headerNav.module.css';
@@ -17,7 +17,7 @@ const HeaderNav= () => {
         <div className={classes.headerTool}>
           <div className={classes.dflexRow}>
             <div className={classes.navbarLogo}>
-                <img className={classes.navbarLogoImg} src='/img/download (1).png' />
+                <img className={classes.navbarLogoImg} src='/img/download (1).png' alt=''/>
             </div>
             <Toolbar component="nav" variant="dense" className={classes.navSection}>
                 <Link
@@ -30,7 +30,7 @@ const HeaderNav= () => {
                   Dashboard
                   { state === "Dashboard" ? 
                     <button className={classes.spider}>
-                      <img className={classes.spider_img} src='/img/spider.svg' />
+                      <img className={classes.spider_img} src='/img/spider.svg' alt=''/>
                     </button>
                     : ""
                   }
@@ -45,7 +45,7 @@ const HeaderNav= () => {
                   Mint
                   { state === "Mint" ? 
                     <button className={classes.spider}>
-                      <img className={classes.spider_img} src='/img/spider.svg' />
+                      <img className={classes.spider_img} src='/img/spider.svg' alt='' />
                     </button>
                     : ""
                   }
@@ -60,7 +60,7 @@ const HeaderNav= () => {
                   Redeem
                   { state === "Redeem" ? 
                     <button className={classes.spider}>
-                      <img className={classes.spider_img} src='/img/spider.svg' />
+                      <img className={classes.spider_img} src='/img/spider.svg' alt=''/>
                     </button>
                     : ""
                   }
@@ -75,7 +75,7 @@ const HeaderNav= () => {
                   Farms
                   { state === "Farms" ? 
                     <button className={classes.spider}>
-                      <img className={classes.spider_img} src='/img/spider.svg' />
+                      <img className={classes.spider_img} src='/img/spider.svg' alt='' />
                     </button>
                     : ""
                   }
@@ -90,7 +90,7 @@ const HeaderNav= () => {
                   Staking
                   { state === "Staking" ? 
                     <button className={classes.spider}>
-                      <img className={classes.spider_img} src='/img/spider.svg' />
+                      <img className={classes.spider_img} src='/img/spider.svg' alt=''/>
                     </button>
                     : ""
                   }
@@ -105,7 +105,7 @@ const HeaderNav= () => {
                   Airdrop
                   { state === "Airdrop" ? 
                     <button className={classes.spider}>
-                      <img className={classes.spider_img} src='/img/spider.svg' />
+                      <img className={classes.spider_img} src='/img/spider.svg' alt=''/>
                     </button>
                     : ""
                   }
@@ -114,9 +114,9 @@ const HeaderNav= () => {
           </div>
           <div className={classes.dflexRow}>
             <Toolbar component="nav" variant="dense" className={classes.priceSection}>
-                {sections2.map((section2) => (
-                  <div className={classes.priceField}>
-                    <img className={classes.priceIcon} src={section2.icon} />
+                {sections2.map((section2, key) => (
+                  <div className={classes.priceField} key={key}>
+                    <img className={classes.priceIcon} src={section2.icon} alt=''/>
                     <Link
                         style={{textDecoration: "none"}} 
                         noWrap
@@ -132,7 +132,7 @@ const HeaderNav= () => {
             </Toolbar>
             <WalletButton />
             <div className={classes.menuMore}>
-              <img src="/img/ic-more.c71eaae837e0cef1ff7e9e4819130373.svg" />
+              <img src="/img/ic-more.c71eaae837e0cef1ff7e9e4819130373.svg" alt=''/>
             </div>
           </div>    
         </div>
