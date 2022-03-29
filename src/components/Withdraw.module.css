@@ -70,7 +70,26 @@
     font-size: 14px;
 }
 .icon {
-
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+.icon:hover .tooltiptext {
+    visibility: visible;
+  }
+.tooltiptext {
+    visibility: hidden;
+    width: 100px;
+    background-color: rgb(68, 96, 128);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 3px 0;
+    /* Position the tooltip */
+    position: absolute;
+    right: -20px;
+    top: 25px;
+    z-index: 1;
 }
 .value_field {
     width: 100%;

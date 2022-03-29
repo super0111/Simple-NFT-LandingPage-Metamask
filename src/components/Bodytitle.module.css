@@ -32,37 +32,47 @@
     border-radius: 20px;
     background: linear-gradient(to left, rgb(2, 46, 89) 100%, rgba(21, 62, 103, 0.38) 50%, rgba(74, 125, 175, 0.56) 0%);
 }
+.img1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 20px;
+}
+.img2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 20px;
+}
 .total::before {
-    width: 145px!important;
-    height: 143px!important;
-    left: 12px!important;
-    bottom: 2px!important;
+    position: absolute;
+    width: 35%!important;
+    height: 60px!important;
+    left: 0px!important;
+    top: -16px!important;
 }
 .total::before {
     content: "";
-    position: absolute;
-    width: 94px;
-    height: 92px;
-    left: 12px;
-    bottom: 2px;
-    background-image: url("bg-tvl-left.7449613aab9e63ff22be.png");
+    background-image: url("1 (1).png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left bottom;
 }
 
 .total::after {
-    width: 70px;
+    width: 40%;
     height: 97px;
     right: 12px;
     top: 0px;
     content: "";
     position: absolute;
-    width: 58px;
-    height: 95px;
-    right: 12px;
-    top: 0px;
-    background-image: url("download (2).png");
+    width: 20%;
+    height: 110px;
+    right: -26px;
+    top: -44px;
+    background-image: url("2 (1).png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: right top;

@@ -10,6 +10,14 @@
     min-height: unset;
     padding: 25px 10px;
 }
+.flexRow {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px 0 20px;
+    margin: auto;
+    max-width: 1070px;
+}
 .total_img {
     width: 45px;
     margin-right: 12px;

@@ -4,6 +4,7 @@ import classes from './Deposit.module.css'
 const Deposit = (props) => {
     
     const { history } = props;
+    console.log("history", history)
     const getDateTime = (sec) => {
         let date = new Date(sec);
         let formated_date = new Intl.DateTimeFormat('en-US').format(date);

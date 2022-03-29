@@ -8,17 +8,13 @@ import Total from './components/Total';
 import Withdraw from './components/Withdraw';
 import Refferals from './components/Refferals';
 import Deposit from './components/Deposit';
-// import { BrowserRouter, Switch, Route,} from 'react-router-dom';
 import Web3 from 'web3';
 import axios from 'axios';
 import { testnetABI as ABI } from './constant/contractABI';
 import { addressSet } from './constant/addressSet';
-
 import TradeContext from './context/TradeContext';
 import { UseWalletProvider } from 'use-wallet';
 import TransakSDK from "@transak/transak-sdk";
-// import { CodeSandboxCircleFilled } from '@ant-design/icons';
-// import { setDefaultLocale } from 'react-datepicker';
 
 const plans = [
   [14, 80],
@@ -30,7 +26,6 @@ const plans = [
 ];
 
 function App() {
-
   const [walletAddress, setWalletAddress] = React.useState("");
   const [web3Instance, setWeb3Instance] = React.useState(null);
   const [balance, setBalance] = React.useState(0);
@@ -39,6 +34,10 @@ function App() {
   const [depositHistory, setDepositHistory] = React.useState([]);
   const [stakedAmount, setStakedAmount] = React.useState(0);
   const [withdrawalAmount, setWithdralAmount] = React.useState(0);
+  const [totalReferralWithdrawn, setTotalReferralWithdrawn] = React.useState(0);
+  const [totalAmount, setTotalAmount] = React.useState(0);
+  const [totalInfo, setTotalInfo] = React.useState([]);
+  const [referralEarned, setReferralEarned] = React.useState(0);
   const settings = {
       apiKey: 'e5736e04-4b3f-429a-919d-28ef20c6f64e',  // Your API Key
       environment: 'STAGING', // STAGING/PRODUCTION
@@ -53,10 +52,6 @@ function App() {
     const effect = async () => {
       await loadWeb3();
       await getBalance();
-      // await convert2USD();
-      
-      // await getUserDepositInfo();
-      
     }
     effect();
   }, []);
@@ -74,6 +69,7 @@ function App() {
       if(!contract || !account) return;
 
       let _history = [];
+      let _total = [];
       if(account && account)
       await contract.methods.getUserAmountOfDeposits(account).call()
       .then(async (res)=>{
@@ -101,17 +97,50 @@ function App() {
       });
       await contract.methods.getUserDividends(account).call()
       .then(res=>{
-        console.log(res);
         setWithdralAmount(window.web3.utils.fromWei(res.toString(),'ether'));
       })
       .catch(err=>{
         console.log(err);
       })
+      await contract.methods.getUserReferralWithdrawn(account).call()
+      .then(res=>{
+        console.log(res);
+        setTotalReferralWithdrawn(window.web3.utils.fromWei(res.toString(),'ether'));
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+      await contract.methods.getUserReferralTotalBonus(account).call()
+      .then(res=>{
+        console.log('referral earned', res);
+        setReferralEarned(window.web3.utils.fromWei(res.toString(),'ether'));
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+      await contract.methods.getContractBalance().call()
+      .then(res=>{
+        console.log(res);
+        setTotalAmount(window.web3.utils.fromWei(res.toString(),'ether'));
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+
+
+      await contract.methods.getContractInfo().call()
+      .then(res=>{
+        console.log("total info", res);
+        _total.push(res);
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+      setTotalInfo(_total);
     }
-    effect();
-    
+    effect();  
   }, [ contract ]);
-  
+
   const loadWeb3 = async () => {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
@@ -133,7 +162,6 @@ function App() {
     let balance = await window.web3.eth.getBalance(accounts[0])
     const ethBalance = window.web3.utils.fromWei(balance, 'ether')
     setBalance(ethBalance);
-    // .then(console.log);
   }
   const convert2USD = async (value) => {
     await axios.get(
@@ -176,7 +204,6 @@ function App() {
       console.log(err);
     })
   }
-
   const openTransak = () => {
       const transak = new TransakSDK(settings);
   
@@ -193,7 +220,6 @@ function App() {
       });
   }
 
-
   return (
     <UseWalletProvider
       chainId={56}
@@ -204,7 +230,8 @@ function App() {
       <TradeContext.Provider value={{ walletAddress, setWalletAddress, web3Instance, setWeb3Instance, openTransak }} >
         <div className={classes.body}>
           <HeaderNav />
-          <Bodytitle />
+          
+          <Bodytitle amount={totalAmount}/>
           <div className={classes.flexRow}>
             <FSM balance={balance} stake={stake} plan={plans[0]} plan_id={0}/>
             <FSM balance={balance} stake={stake} plan={plans[1]} plan_id={1} />
@@ -215,14 +242,10 @@ function App() {
             <FSM  balance={balance} stake={stake} plan={plans[4]} plan_id={4} />
             <FSM  balance={balance} stake={stake} plan={plans[5]} plan_id={5} />
           </div>
-          <div className={classes.flexRow}>
-            <Total />
-            <Total />
-            <Total />
-          </div>
+          <Total totalInfo = {totalInfo} />
           <div className={classes.flexRow}>
             <Refferals withdrawFunc={withdraw} amount={stakedAmount} withdrawalAmount={withdrawalAmount}/>
-            <Withdraw />
+            <Withdraw account={account} totalReferralWithdrawn={totalReferralWithdrawn} referralEarned={referralEarned} />
           </div>
           <div className={classes.flexRow}>
             <Deposit history={depositHistory} />

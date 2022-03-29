@@ -14,7 +14,7 @@ const Refferals = (props) => {
                 <div className={classes.bonus_value}>3% BONUS</div>
                 <div className={classes.input}>
                     <div className={classes.input_name}>Available AVAX for withdrawal</div>    
-                    <div className={classes.input_value}><FcCurrencyExchange />{withdrawalAmount}</div>
+                    <div className={classes.input_value}><FcCurrencyExchange />{withdrawalAmount ? Number(withdrawalAmount).toFixed(3) : "0"}</div>
                 </div>
                 <button className={classes.btn} onClick={withdrawFunc}>WITHDRAW</button>
             </div>

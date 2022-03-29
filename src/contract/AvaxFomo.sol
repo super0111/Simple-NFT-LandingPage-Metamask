@@ -69,6 +69,8 @@ contract AVAXFomo {
         plans.push(Plan(14, 80));
         plans.push(Plan(21, 75));
         plans.push(Plan(28, 70));
+	
+	
 	}
 
 	function launch() public {
