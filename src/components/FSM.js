@@ -43,7 +43,7 @@ const FSM = (props) => {
                 </div>
                 <div className={classes.amount}>
                     <div className={classes.flexRow}>
-                        <div className={classes.amount_name}>Amount: </div>    
+                        <div className={classes.amount_name}>Amounts: </div>    
                         <div className={classes.balance}>Wallet Balance: { balance ? Number(balance).toFixed(2) : "0"} AVAX</div>
                     </div>
                     <div className={classes.amount_value}>
