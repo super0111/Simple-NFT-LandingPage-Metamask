@@ -127,7 +127,6 @@ function App() {
         console.log(err);
       })
 
-
       await contract.methods.getContractInfo().call()
       .then(res=>{
         console.log("total info", res);
